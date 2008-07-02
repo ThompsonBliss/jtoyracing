@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<project name="JToyRacing" default="dist_linux" basedir=".">
+	<property name="src" value="${basedir}/src/main/java"/>
+	<property name="resources" value="${basedir}/src/main/resources"/>
+	<property name="build" value="${basedir}/target/classes"/>
+	<property name="dist-linux" value="${basedir}/dist/linux"/>
+	<property name="dist-windows" value="${basedir}/dist/windows"/>
+	<property name="lib" value="${basedir}/lib"/>
+	<!-- target clean_linux -->
+	<target name="clean_linux">
+		<echo>Cleaning the linux build directories.</echo>
+		<delete dir="${dist-linux}"/>
+	</target>
+	<!-- target clean_windows -->
+	<target name="clean_windows">
+		<echo>Cleaning the windows build directories.</echo>
+		<delete dir="${dist-windows}"/>
+	</target>
+	<!-- target init_linux -->
+	<target name="init_linux" depends="clean_linux">
+		<echo>Creating dist linux directory.</echo>
+		<mkdir dir="${dist-linux}"/>
+		<echo>Copying video properties file to linux directory.</echo>
+		<copy file="${basedir}/properties.cfg" todir="${dist-linux}"/>
+		<echo>Copying executable file to linux directory.</echo>
+		<copy file="${basedir}/executables/JToyRacingLinux.sh" todir="${dist-linux}"/>
+		<echo>Copying linux LIB directory.</echo>
+		<mkdir dir="${dist-linux}/lib"/>
+		<copy todir="${dist-linux}/lib">
+			<fileset dir="${lib}">
+				<include name="*.jar"/>
+				<exclude name="easy*.jar"/>
+				<exclude name="jmockit.jar"/>
+				<exclude name="junit*.jar"/>
+				<include name="*.so"/>
+			</fileset>
+		</copy>
+	</target>
+	<!-- target init_windows -->
+	<target name="init_windows" depends="clean_windows">
+		<echo>Creating dist windows directory.</echo>
+		<mkdir dir="${dist-windows}"/>
+		<echo>Copying video properties file to windows directory.</echo>
+		<copy file="${basedir}/properties.cfg" todir="${dist-windows}"/>
+		<echo>Copying executable file to windows directory.</echo>
+		<copy file="${basedir}/executables/JToyRacingWindows.bat" todir="${dist-windows}"/>
+		<echo>Copying windows LIB directory.</echo>
+		<mkdir dir="${dist-windows}/lib"/>
+		<copy todir="${dist-windows}/lib">
+			<fileset dir="${lib}">
+				<include name="*.jar"/>
+				<include name="*.jar"/>
+				<exclude name="easy*.jar" />
+				<exclude name="jmockit.jar" />
+				<exclude name="junit*.jar" />
+				<include name="*.dll" />
+			</fileset>
+		</copy>
+	</target>
+	<!-- target compile -->
+	<target name="compile">
+		<echo>Compiling the project.</echo>
+		<javac srcdir="${src}" destdir="${build}"/>
+	</target>
+	<!-- target linux dist -->
+	<target name="dist_linux" depends="init_linux, compile">
+		<echo>Creating jar for linux.</echo>
+		<jar jarfile="${dist-linux}/JToyRacingLinux.jar" basedir="${build}">
+			<manifest>
+				<attribute name="Main-Class" value="net.juniorbl.jtoyracing.core.JToyRacing"/>
+				<attribute name="Class-Path" value="./bin ./lib/jme-physics-all.jar ./lib/jme-gamestates.jar ./lib/lwjgl_applet.jar ./lib/jorbis-0.0.15.jar ./lib/lwjgl_fmod3.jar ./lib/odejava-jni.jar ./lib/jme-scene.jar ./lib/jogg-0.0.7.jar ./lib/jinput.jar ./lib/jme.jar lib/jme-audio.jar ./lib/jme-awt.jar ./lib/jme-font.jar ./lib/jme-collada.jar ./lib/jme-editors.jar ./lib/jme-effects.jar ./lib/jme-model.jar ./lib/jme-sound.jar ./lib/jme-terrain.jar ./lib/lwjgl.jar ./lib/lwjgl_test.jar ./lib/lwjgl_util.jar ./lib/lwjgl_util_applet.jar"/>
+			</manifest>
+			<fileset dir="${resources}"/>
+		</jar>
+	</target>
+	<!-- target windows dist -->
+	<target name="dist_windows" depends="init_windows, compile">
+		<echo>Creating jar for windows.</echo>
+		<jar jarfile="${dist-windows}/JToyRacingWindows.jar" basedir="${build}">
+			<includesfile />
+			<manifest>
+				<attribute name="Main-Class" value="net.juniorbl.jtoyracing.core.JToyRacing"/>
+				<attribute name="Class-Path" value="./bin ./lib/jme-physics-all.jar ./lib/jme-gamestates.jar ./lib/lwjgl_applet.jar ./lib/jorbis-0.0.15.jar ./lib/lwjgl_fmod3.jar ./lib/odejava-jni.jar ./lib/jme-scene.jar ./lib/jogg-0.0.7.jar ./lib/jinput.jar ./lib/jme.jar lib/jme-audio.jar ./lib/jme-awt.jar ./lib/jme-font.jar ./lib/jme-collada.jar ./lib/jme-editors.jar ./lib/jme-effects.jar ./lib/jme-model.jar ./lib/jme-sound.jar ./lib/jme-terrain.jar ./lib/lwjgl.jar ./lib/lwjgl_test.jar ./lib/lwjgl_util.jar ./lib/lwjgl_util_applet.jar"/>
+			</manifest>
+			<fileset dir="${resources}"/>
+		</jar>
+	</target>
+</project>
