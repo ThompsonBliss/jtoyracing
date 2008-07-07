@@ -4,7 +4,7 @@ This is a short guide for those who want to start developing the game.
 
 == Quick Start Guide ==
 
-Once you have checked out the project from the svn repository, put all the _JAR_ files from the _lib_ directory in your IDE's classpath. Run _JToyRacing_ passing _-Djava.library.path=lib_ as a virtual machine argument.
+Once you have checked out the project from the svn repository, put all the _JAR_ files from the _lib_ directory in your project's classpath. Run _JToyRacing_ passing _-Djava.library.path=lib_ as a virtual machine argument.
 
 == Package and directory organization ==
 
