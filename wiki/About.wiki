@@ -1,6 +1,6 @@
 = About JToyRacing =
 
-JToyRacing is a demo game that I’ve made for my postgraduate degree. The key point was how to make a game using Java and an game engine, JToyRacing runs on top of jMonkeyEngine.
+JToyRacing is a demo game that I’ve made for my postgraduate degree. The key point was how to make a game using Java and a game engine, it runs on top of jMonkeyEngine.
 
 Although the game doesn't have objectives at the moment, it is playable. There are two checkpoints in the race track that restore the vehicle's health.
 
