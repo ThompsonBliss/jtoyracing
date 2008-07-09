@@ -1,3 +1,5 @@
+#summary About the project
+
 = About JToyRacing =
 
 JToyRacing is a demo game that I’ve made for my postgraduate degree. The key point was how to make a game using Java and a game engine, it runs on top of jMonkeyEngine.
